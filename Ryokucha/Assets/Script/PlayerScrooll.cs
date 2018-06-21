@@ -14,6 +14,7 @@ public class PlayerScrooll : MonoBehaviour {
     private float jumpTimeElapsed = 0f;
     public bool IsStop { get; private set; }
     public CreateObject createObject;
+    public GameController gameCtrl;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class PlayerScrooll : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        IsStop = false;
+        IsStop = true;
     }
 
     // Update is called once per frame
@@ -105,5 +106,11 @@ public class PlayerScrooll : MonoBehaviour {
         rigidbody2d.Sleep();
         IsStop = true;
         createObject.SendMessage("Stop");
+
+        gameCtrl.SendMessage("GameOver");
+    }
+
+    public void ScrollStart() {
+        IsStop = false;
     }
 }

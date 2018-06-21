@@ -21,7 +21,7 @@ public class CreateObject : MonoBehaviour {
 
     private void Update()
     {
-        if (isStop) return;
+        if (!GameController.isPlaying) return;
 
         if(lastCreateTime + createInterval < Time.time) {
             CreateObj();
