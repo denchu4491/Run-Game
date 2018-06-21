@@ -12,7 +12,8 @@ public class PlayerScrooll : MonoBehaviour {
     private bool isGround;
     private bool inputJump, isJump;
     private float jumpTimeElapsed = 0f;
-    private bool isStop = false;
+    public bool IsStop { get; private set; }
+    public CreateObject createObject;
 
     private void Awake()
     {
@@ -23,13 +24,13 @@ public class PlayerScrooll : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        IsStop = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isStop) return;
+        if (IsStop) return;
 
         inputJump = false;
 
@@ -49,7 +50,7 @@ public class PlayerScrooll : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (isStop) return;
+        if (IsStop) return;
 
         velocity = Vector2.zero;
 
@@ -100,7 +101,9 @@ public class PlayerScrooll : MonoBehaviour {
     private void Stop()
     {
         animator.speed = 0f;
+        rigidbody2d.velocity = Vector2.zero;
         rigidbody2d.Sleep();
-        isStop = true;
+        IsStop = true;
+        createObject.SendMessage("Stop");
     }
 }

@@ -12,7 +12,7 @@ public class Rock : MonoBehaviour {
         player = GameObject.Find("Player").transform;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (player.position.x - transform.position.x > destroyPoint) {
             Destroy(gameObject);

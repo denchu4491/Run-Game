@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 408835474}
   m_Layer: 0
   m_Name: playerBodyCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 999400570}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -632,7 +632,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999400566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 473943955}
@@ -688,6 +688,7 @@ MonoBehaviour:
   moveSpeed: 2
   jumpPower: 200
   jumpCoolTIme: 0.1
+  createObject: {fileID: 1147482207}
 --- !u!1001 &1089667796
 Prefab:
   m_ObjectHideFlags: 0
@@ -776,6 +777,8 @@ MonoBehaviour:
   randamRange: 3
   setObject:
   - {fileID: 1897108693622226, guid: 57d37ef28fe2b6b42b0a1f6cee96628f, type: 2}
+  - {fileID: 1329206837680820, guid: 2d3d025036b6e7945a1dac7e99a75899, type: 2}
+  eaglePosY: 0.3
 --- !u!4 &1147482208
 Transform:
   m_ObjectHideFlags: 0
