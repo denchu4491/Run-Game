@@ -31,7 +31,7 @@ public class CreateObject : MonoBehaviour {
     void CreateObj()
     {
         // 0はRock、1はEagle
-        int select = 1;
+        int select = Random.Range(0,2);
         float diffX = offset + Random.Range(-2.0f, 2.0f);
 
         switch (select) {

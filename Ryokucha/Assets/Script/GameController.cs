@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public PlayerScrooll player;
     private bool isGameOver;
     public string sceneName;
+    public ScoreText scoreText;
 
     private void Awake() {
         player = GameObject.Find("Player").GetComponent<PlayerScrooll>();
@@ -33,6 +34,9 @@ public class GameController : MonoBehaviour {
         else if (!isPlaying && Input.GetKeyDown(KeyCode.Return)) {
             GameStart();
         }
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            scoreText.Reset();
+        }
 	}
 
     public void GameStart() {
@@ -46,6 +50,7 @@ public class GameController : MonoBehaviour {
             gameOver.SetActive(true);
             isPlaying = false;
             isGameOver = true;
+            scoreText.Save();
         }
     }
 }

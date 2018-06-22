@@ -5,20 +5,39 @@ using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour {
     private Transform player;
-    private Text text;
-
-    private void Awake()
-    {
-        text = GetComponent<Text>();
-    }
+    public Text scoreText;
+    public Text highscoreText;
+    private float score;
+    private float highScore;
 
     // Use this for initialization
     void Start () {
+        score = 0;
         player = GameObject.Find("Player").transform;
-	}
+        highScore = PlayerPrefs.GetFloat("highScoreKey", 0);
+        highscoreText.text = "Hi:" + string.Format("{0:000000}", highScore * 10);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        text.text = "Score: " + string.Format("{0:000000}",player.position.x * 10);
-	}
+        if (!GameController.isPlaying) return;
+        score = player.position.x;
+
+        scoreText.text = string.Format("{0:000000}", score * 10);
+    }
+
+    public void Save() {
+        if (highScore < score) {
+            highScore = score;
+            highscoreText.text = "Hi:" + string.Format("{0:000000}", highScore * 10);
+            PlayerPrefs.SetFloat("highScoreKey", highScore);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public void Reset() {
+        highScore = 0f;
+        highscoreText.text = "Hi:" + string.Format("{0:000000}", highScore * 10);
+        PlayerPrefs.DeleteKey("highScoreKey");
+    }
 }

@@ -7,7 +7,7 @@ public class PlayerScrooll : MonoBehaviour {
     private Animator animator;
     private Rigidbody2D rigidbody2d;
     public float moveSpeed = 3.0f;
-    public float jumpPower = 10.0f, jumpCoolTIme = 0.1f;
+    public float jumpPower = 10.0f, jumpCoolTime = 0.1f;
     private Vector2 velocity;
     private bool isGround;
     private bool inputJump, isJump;
@@ -37,7 +37,7 @@ public class PlayerScrooll : MonoBehaviour {
 
         if (isJump) {
             jumpTimeElapsed += Time.deltaTime;
-            if (jumpTimeElapsed > jumpCoolTIme) {
+            if (jumpTimeElapsed > jumpCoolTime) {
                 isJump = false;
                 jumpTimeElapsed = 0.0f;
             }
@@ -102,7 +102,7 @@ public class PlayerScrooll : MonoBehaviour {
     private void Stop()
     {
         animator.speed = 0f;
-        rigidbody2d.velocity = Vector2.zero;
+        rigidbody2d.isKinematic = true;
         rigidbody2d.Sleep();
         IsStop = true;
         createObject.SendMessage("Stop");
