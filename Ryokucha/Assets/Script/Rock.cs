@@ -15,6 +15,7 @@ public class Rock : MonoBehaviour {
     protected virtual void Update()
     {
         if (player.position.x - transform.position.x > destroyPoint) {
+            GameObject.Find("CreateObjectManage").GetComponent<CreateObject>().CountDown();
             Destroy(gameObject);
         }
     }
