@@ -6,8 +6,8 @@ public class PlayerScrooll : MonoBehaviour {
 
     private Animator animator;
     private Rigidbody2D rigidbody2d;
-    public float moveSpeed = 3.0f;
-    public float jumpPower = 10.0f, jumpCoolTime = 0.1f;
+    public float moveSpeed = 2.0f;
+    public float jumpPower = 1.0f, jumpCoolTime = 0.1f;
     private Vector2 velocity;
     private bool isGround;
     private bool inputJump, isJump;
@@ -15,9 +15,16 @@ public class PlayerScrooll : MonoBehaviour {
     public bool IsStop { get; private set; }
     public CreateObject createObject;
     public GameController gameCtrl;
+    public float maxSpeed = 3.0f;
+    private int speedCount = 1;
+    public int speedChange = 10;
+    private float speedUpdiff;
+    public float jumpLimit = 10;
+    private float jumpLength = 0;
 
     private void Awake()
     {
+        speedUpdiff = (maxSpeed - moveSpeed) / speedChange;
         animator = GetComponentInChildren<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
@@ -32,7 +39,6 @@ public class PlayerScrooll : MonoBehaviour {
     void Update()
     {
         if (IsStop) return;
-
         inputJump = false;
 
         if (isJump) {
@@ -52,7 +58,10 @@ public class PlayerScrooll : MonoBehaviour {
     private void FixedUpdate()
     {
         if (IsStop) return;
-
+        if (speedCount <= speedChange && transform.position.x > speedCount * 10) {
+            speedCount++;
+            moveSpeed += speedUpdiff;
+        }
         velocity = Vector2.zero;
 
         Move();
@@ -62,6 +71,7 @@ public class PlayerScrooll : MonoBehaviour {
         }
 
         rigidbody2d.velocity = new Vector2(velocity.x, rigidbody2d.velocity.y);
+
     }
 
     private void Move()

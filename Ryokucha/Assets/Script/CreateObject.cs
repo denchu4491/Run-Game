@@ -24,6 +24,7 @@ public class CreateObject : MonoBehaviour {
     private void Start()
     {
         player = GameObject.Find("Player").transform;
+        prevObjPos = new Vector3(2.0f, 0f, 0f);
     }
 
     private void Update()
@@ -41,7 +42,8 @@ public class CreateObject : MonoBehaviour {
     void CreateObj()
     {
         // 0はRock、1はEagle
-        int select = Random.Range(0,2);
+        int select = Random.Range(0, setObject.Length);
+        //int select = 2;
         float diffX = offset + Random.Range(-randamRange, randamRange);
         Vector3 createPos = Vector3.zero;
 
@@ -55,6 +57,11 @@ public class CreateObject : MonoBehaviour {
             case 1:
                 int y = Random.Range(0, 2);
                 createPos = new Vector3(prevObjPos.x + diffX, setObject[select].transform.position.y + (y * eaglePosY), 0f);
+                createPos.x = Mathf.Clamp(createPos.x, prevObjPos.x + minOffset, prevObjPos.x + maxOffset);
+                Instantiate(setObject[select], createPos, Quaternion.identity);
+                break;
+            case 2:
+                createPos = new Vector3(prevObjPos.x + diffX, setObject[select].transform.position.y, 0f);
                 createPos.x = Mathf.Clamp(createPos.x, prevObjPos.x + minOffset, prevObjPos.x + maxOffset);
                 Instantiate(setObject[select], createPos, Quaternion.identity);
                 break;

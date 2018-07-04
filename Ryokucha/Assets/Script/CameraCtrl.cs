@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraCtrl : MonoBehaviour {
 
     private Transform player;
+    public float offset;
 
     // Use this for initialization
     void Start () {
@@ -13,6 +14,6 @@ public class CameraCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(player.position.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(player.position.x + offset, transform.position.y, transform.position.z);
 	}
 }

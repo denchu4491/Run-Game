@@ -7,7 +7,7 @@ public class Rock : MonoBehaviour {
     public float destroyPoint;
     private Transform player;
 
-    private void Start()
+    protected virtual void Start()
     {
         player = GameObject.Find("Player").transform;
     }

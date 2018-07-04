@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
     private bool isGameOver;
     public string sceneName;
     public ScoreText scoreText;
+    public AudioSource audioSource;
 
     private void Awake() {
         player = GameObject.Find("Player").GetComponent<PlayerScrooll>();
@@ -31,7 +32,7 @@ public class GameController : MonoBehaviour {
                 SceneManager.LoadScene(sceneName);
             }
         }
-        else if (!isPlaying && Input.GetKeyDown(KeyCode.Return)) {
+        else if (!isPlaying && Input.GetKeyDown(KeyCode.Space)) {
             GameStart();
         }
         if (Input.GetKeyDown(KeyCode.F1)) {
@@ -41,6 +42,7 @@ public class GameController : MonoBehaviour {
 
     public void GameStart() {
         start.SetActive(false);
+        audioSource.Play();
         isPlaying = true;
         player.ScrollStart();
     }
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour {
     public void GameOver() {
         if (isPlaying) {
             gameOver.SetActive(true);
+            audioSource.Stop();
             isPlaying = false;
             isGameOver = true;
             scoreText.Save();
